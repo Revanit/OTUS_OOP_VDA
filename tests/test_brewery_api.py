@@ -3,6 +3,7 @@ import requests
 
 BASE_URL = "https://api.openbrewerydb.org/v1"
 
+
 class TestBreweryApi:
     def test_get_breweries_list(self):
         response = requests.get(f"{BASE_URL}/breweries")
@@ -25,16 +26,13 @@ class TestBreweryApi:
         data = response.json()
         assert len(data) <= per_page
 
-    @pytest.mark.parametrize("brewery_id", [
-        "b54b16e1-ac3b-4bff-a11f-f7ae9ddc27e0"
-    ])
+    @pytest.mark.parametrize("brewery_id", ["b54b16e1-ac3b-4bff-a11f-f7ae9ddc27e0"])
     def test_get_single_brewery(self, brewery_id):
         response = requests.get(f"{BASE_URL}/breweries/{brewery_id}")
         assert response.status_code == 200
         data = response.json()
         assert data["id"] == brewery_id
         assert data["name"] == "MadTree Brewing 2.0"
-
 
     @pytest.mark.parametrize("query", ["dog", "brew"])
     def test_search_brewery(self, query):

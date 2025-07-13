@@ -3,6 +3,7 @@ import requests
 
 BASE_URL = "https://dog.ceo/api"
 
+
 class TestDogApi:
     def test_get_all_breeds(self):
         response = requests.get(f"{BASE_URL}/breeds/list/all")
